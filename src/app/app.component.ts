@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DataBaseService } from './data-base.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'contui';
+  // public isAppReady = false;
+  constructor(public db: DataBaseService) {
+    this.db.loadData.then(res => {
+      this.db.isDataFetched = true;
+    })
+  }
+
 }

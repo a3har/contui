@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   selectedID: any
   images: any
   constructor(public db: DataBaseService, private firestore: AngularFirestore) {
+
   }
 
 

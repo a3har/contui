@@ -1,2 +1,5 @@
 src/environments/environment.prod.ts
 src/environments/environment.ts
+node_modules
+.vscode
+package-lock.json
