@@ -11,6 +11,10 @@ export class DataBaseService {
   isDataFetched = false
   dataToBeUploaded: any
   firebaseData: any
+  selectedindex: any
+  selectedWord: any
+  selectedWordData: any
+  selectedID: any
   loadData = new Promise((resolve, reject) => {
     this.getImgsFromJSON();
     resolve("Got all Imgs")
@@ -28,9 +32,22 @@ export class DataBaseService {
     })
     // this.firestore.collection("allImgs", ref => ref
     //   .where("checked", "==", 0).limitToLast(1)).snapshotChanges().subscribe(res => {
-    //     // console.log(res)
     //     this.firebaseData = res;
     //   })
+    this.getNewWord()
+  }
+
+  getNewWord() {
+    this.firestore.collection("allImgs", ref => ref
+      .where("checked", "==", 0).orderBy('images').limitToLast(3)).snapshotChanges().subscribe(res => {
+        this.firebaseData = res;
+        this.selectedindex = this.randomIDgen()
+        this.selectedWord = this.firebaseData[this.selectedindex].payload.doc
+        this.selectedWordData = this.selectedWord.data();
+        this.selectedID = this.selectedWordData.wordID
+        this.selectedWordData.checked += 1
+      })
+
   }
 
   firebaseDataToBeUploaded() {
@@ -41,8 +58,8 @@ export class DataBaseService {
     return this.http.get("assets/all_data.json");
   }
   randomIDgen() {
-    // return Math.floor(Math.random() * this.firebaseData.length);
-    return Math.floor(Math.random() * 1211);
+    return Math.floor(Math.random() * this.firebaseData.length);
+    // return Math.floor(Math.random() * 3);
 
   }
 }

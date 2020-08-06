@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataBaseService } from '../data-base.service'
 import { AngularFirestore } from '@angular/fire/firestore'
+import { toBase64String } from '@angular/compiler/src/output/source_map';
 
 @Component({
   selector: 'app-home',
@@ -9,11 +10,7 @@ import { AngularFirestore } from '@angular/fire/firestore'
 })
 export class HomeComponent implements OnInit {
 
-
-
-  selectedindex: any
   selectedImgs = []
-  selectedID: any
   images: any
   constructor(public db: DataBaseService, private firestore: AngularFirestore) {
 
@@ -24,7 +21,7 @@ export class HomeComponent implements OnInit {
     // this.selectedindex = this.db.randomIDgen()
     // this.selectedID = this.selectedindex
     // this.images = this.db.allImgData[this.selectedID]['images']
-    this.displayNextWord()
+    // this.displayNextWord()
   }
 
   onClickNone() {
@@ -34,15 +31,18 @@ export class HomeComponent implements OnInit {
   onImgClick(index) {
     if (!this.selectedImgs.includes(index)) {
       this.selectedImgs.push(index)
+      this.db.selectedWordData.images[index]['count'] += 1
     }
     else {
       for (var i = 0; i < this.selectedImgs.length; i++) {
         if (this.selectedImgs[i] == index) {
           this.selectedImgs.splice(i, 1);
+          this.db.selectedWordData.images[index]['count'] -= 1
           break;
         }
       }
     }
+    // console.log(this.db.selectedWordData.images);
   }
   displayNextWord() {
 
@@ -50,11 +50,9 @@ export class HomeComponent implements OnInit {
     // this.images = this.db.firebaseData[this.selectedindex].payload.doc.data().images
     // this.selectedID = this.db.firebaseData[this.selectedindex].payload.doc.data().wordID
     // this.updateFirebase().then(res => {
-    this.selectedindex = this.db.randomIDgen()
-    this.selectedID = this.selectedindex
-    this.images = this.db.allImgData[this.selectedID]['images']
-    console.log(this.selectedImgs)
-    this.selectedImgs = []
+    this.testing()
+    // this.db.getNewWord();
+    // console.log(this.db.selectedWordData)
     // }).catch(err => {
     //   console.log(err)
     // })
@@ -73,11 +71,24 @@ export class HomeComponent implements OnInit {
   // }
 
   addAlltodatabase() {
-    Object.keys(this.db.firebaseData).forEach(element => {
-      this.firestore.collection("allImgs").add(this.db.firebaseData[element]).catch(err => {
+    Object.keys(this.db.dataToBeUploaded).forEach(element => {
+      this.firestore.collection("allImgs").add(this.db.dataToBeUploaded[element]).catch(err => {
         console.log(err)
       })
     })
   }
 
+  testing() {
+    // getNextset
+    this.firestore.collection("allImgs").doc(this.db.selectedWord.id).set(this.db.selectedWordData).then(res => {
+      this.db.getNewWord();
+      console.log(this.db.selectedWordData)
+      this.selectedImgs = []
+
+      console.log("Word successfully added to firebase database");
+    })
+  }
+
 }
+
+
