@@ -40,7 +40,7 @@ export class DataBaseService {
   getNewWord() {
     this.isDataFetched = false;
     this.firestore.collection("allImgs", ref => ref
-      .where("checked", "==", this.minimumchecked.minimum_checked).orderBy('images').limitToLast(3)).snapshotChanges().subscribe(res => {
+      .where("checked", "==", this.minimumchecked.minimum_checked).orderBy('images').limitToLast(1)).snapshotChanges().subscribe(res => {
         this.firebaseData = res;
         this.selectedindex = this.randomIDgen()
         this.selectedWord = this.firebaseData[this.selectedindex].payload.doc
