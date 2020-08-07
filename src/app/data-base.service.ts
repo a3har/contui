@@ -15,6 +15,7 @@ export class DataBaseService {
   selectedWord: any
   selectedWordData: any
   selectedID: any
+  minimumchecked: any
   loadData = new Promise((resolve, reject) => {
     this.getImgsFromJSON();
     resolve("Got all Imgs")
@@ -30,22 +31,23 @@ export class DataBaseService {
     this.firebaseDataToBeUploaded().subscribe(data => {
       this.dataToBeUploaded = data;
     })
-    // this.firestore.collection("allImgs", ref => ref
-    //   .where("checked", "==", 0).limitToLast(1)).snapshotChanges().subscribe(res => {
-    //     this.firebaseData = res;
-    //   })
-    this.getNewWord()
+    this.firestore.collection("otherVariables").doc('DNgi5YZLq7RHrFNS4xHR').snapshotChanges().subscribe(res => {
+      this.minimumchecked = res.payload.data()
+      this.getNewWord()
+    })
   }
 
   getNewWord() {
+    this.isDataFetched = false;
     this.firestore.collection("allImgs", ref => ref
-      .where("checked", "==", 0).orderBy('images').limitToLast(3)).snapshotChanges().subscribe(res => {
+      .where("checked", "==", this.minimumchecked.minimum_checked).orderBy('images').limitToLast(3)).snapshotChanges().subscribe(res => {
         this.firebaseData = res;
         this.selectedindex = this.randomIDgen()
         this.selectedWord = this.firebaseData[this.selectedindex].payload.doc
         this.selectedWordData = this.selectedWord.data();
         this.selectedID = this.selectedWordData.wordID
         this.selectedWordData.checked += 1
+        this.isDataFetched = true;
       })
 
   }
@@ -59,7 +61,5 @@ export class DataBaseService {
   }
   randomIDgen() {
     return Math.floor(Math.random() * this.firebaseData.length);
-    // return Math.floor(Math.random() * 3);
-
   }
 }

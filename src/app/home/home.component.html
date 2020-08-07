@@ -1,29 +1,19 @@
 <div class="container" *ngIf="db.isDataFetched">
-  <h1 style="display: block; text-align: center;">{{db.allImgData[this.db.selectedID]['wordDetails'][0]}}</h1>
-  <h4 style="display: block; text-align: center;">
+  <h1 class="heading">{{db.allImgData[this.db.selectedID]['wordDetails'][0]}}</h1>
+  <h4 class="heading">
     {{db.allImgData[this.db.selectedID]['wordDetails'][1]}}</h4>
   <div class="row justify-content-around">
     <div class="col-sm-12 col-md-4 mt-4 justify-content-center"
       *ngFor="let image of db.allImgData[this.db.selectedID]['images'];let index= index;" style="text-align: center;">
-      <img [src]="image['src']" class="img-fluid img-thumbnail"
-        [ngClass]="{'selected': this.selectedImgs.includes(index)}" style="height: 300px; width: 300px;"
-        (click)="onImgClick(index)">
+      <img [src]="image['src']" class="img-fluid img-thumbnail image"
+        [ngClass]="{'selected': this.selectedImgs.includes(index)}" (click)="onImgClick(index)">
     </div>
-    <div class="col-sm-12 col-md-4 mt-4 justify-content-end align-self-center"
-      style="height: 300px;width: 300px;text-align: center; vertical-align: middle;line-height: 300px;border-color: green;border-width: 0.5em;border-style: solid;">
+    <div class="col-sm-12 col-md-4 mt-4 justify-content-end align-self-center nonebox"
+      [ngClass]="{'selected':this.none}" (click)="onClickNone()">
       None</div>
   </div>
   <button type="button" class="btn btn-primary mt-5 mb-5 btn-lg" (click)="displayNextWord()"
     style="float: right;">Submit</button>
   <button type="button" class="btn btn-primary mt-5 mb-5 mx-3 btn-lg" (click)="onClickNone()"
     style="float: right;">None</button>
-  <!-- <button type="button" class="btn btn-primary mt-5 mb-5 mx-3 btn-lg" (click)="addAlltodatabase()"
-    style="float: right;">Reset Database</button> -->
-
-
-  <!-- <div *ngFor="let image of this.images">
-    <p><span> {{ image.src }} :</span> <span> {{ image.count }}</span></p>
-  </div> -->
-  <!-- <div>{{ db.firebaseData[this.selectedindex].payload.doc.data().checked }}</div> -->
-  <div>{{ this.selectedImgs }}</div>
 </div>

@@ -2,3 +2,20 @@
     border-color: green;
     border-width: 0.5em;
 }
+
+.nonebox{
+    height: 300px;width: 300px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 300px;
+    border-style: solid;
+}
+
+.image{
+    height: 300px; width: 300px;
+}
+
+.heading{
+    display: block; 
+    text-align: center;
+}
