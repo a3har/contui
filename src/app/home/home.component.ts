@@ -45,7 +45,11 @@ export class HomeComponent implements OnInit {
   displayNextWord() {
     this.db.selectedWordData.checked += 1;
     console.log(this.db.selectedWordData);
-    this.firestore.collection("allImgs").doc(this.db.selectedWord.id).set(this.db.selectedWordData).then(res => {
+    let docId = this.db.allImgData[this.db.selectedWordData.wordID]["wordDetails"][0];
+    this.db.isDataFetched = false;
+
+    this.firestore.collection("allImgsNew").doc(docId).set(this.db.selectedWordData).then(res => {
+      this.db.isUserViewing = false;
       this.db.getNewWord();
       this.selectedImgs = []
       console.log("Word successfully added to firebase database");

@@ -3,7 +3,8 @@
   <div style="position: relative;">
     <div class="fixHeader">
       <br>
-      <h1 class="heading">{{db.allImgData[db.selectedID]['wordDetails'][0]}}</h1>
+      <h1 class="heading">
+        {{db.allImgData[db.selectedID]['wordDetails'][0]  }}</h1>
       <h4 class="heading">{{db.allImgData[db.selectedID]['wordDetails'][1]}}</h4>
       <p>Select Images/GIF that matches Best with the Given Word and Meaning (You can select multiple)</p>
     </div>
@@ -29,3 +30,6 @@
       style="float: right;">Submit & Next</button>
   </div>
 </div>
+
+
+<!-- <button (click)= "this.db.uploadImageData()">CLick me</button> -->
