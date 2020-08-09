@@ -1,17 +1,31 @@
 <div class="container" *ngIf="db.isDataFetched">
-  <h1 class="heading">{{db.allImgData[db.selectedID]['wordDetails'][0]}}</h1>
-  <h4 class="heading">
-    {{db.allImgData[db.selectedID]['wordDetails'][1]}}</h4>
-  <div class="row justify-content-around">
-    <div class="col-sm-12 col-md-4 mt-4 justify-content-center"
-      *ngFor="let image of db.allImgData[db.selectedID]['images'];let index= index;" style="text-align: center;">
-      <img [src]="image['src']" class="img-fluid img-thumbnail image"
-        [ngClass]="{'selected': selectedImgs.includes(index)}" (click)="onImgClick(index)">
+
+  <div style="position: relative;">
+    <div class="fixHeader">
+      <br>
+      <h1 class="heading">{{db.allImgData[db.selectedID]['wordDetails'][0]}}</h1>
+      <h4 class="heading">{{db.allImgData[db.selectedID]['wordDetails'][1]}}</h4>
+      <p>Select Images/GIF that matches Best with the Given Word and Meaning (You can select multiple)</p>
     </div>
-    <div class="col-sm-12 col-md-4 mt-4 justify-content-end align-self-center nonebox" [ngClass]="{'selected':none}"
-      (click)="onClickNone()">
-      None</div>
   </div>
-  <button type="button" class="btn btn-primary mt-5 mb-5 btn-lg" (click)="displayNextWord()"
-    style="float: right;">Submit</button>
+  <div class="mainContent">
+
+
+    <div class="allinOneRow">
+
+      <div class="oneImage" *ngFor="let image of db.allImgData[db.selectedID]['images'];let index= index;">
+        <img [src]="image['src']" class="img-fluid img-thumbnail image"
+          [ngClass]="{'selected': selectedImgs.includes(index)}" (click)="onImgClick(index)">
+
+      </div>
+      <div class="oneImage nonebox" [ngClass]="{'selected':none}" (click)="onClickNone()">
+        None</div>
+
+    </div>
+
+
+
+    <button type="button" class="btn btn-primary mt-5 mb-5 btn-lg" (click)="displayNextWord()"
+      style="float: right;">Submit & Next</button>
+  </div>
 </div>

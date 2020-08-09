@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "contui"
+    }
+  },
+  "defaultProject": "contui",
+  "cli": {
+    "analytics": "c2b9b29a-1930-4088-89d1-2b0da775d259"
+  }
 }

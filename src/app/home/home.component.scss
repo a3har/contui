@@ -2,7 +2,35 @@
     border-color: green;
     border-width: 0.5em;
 }
+.fixHeader{
+    position: fixed;
+    top: 0px;
+    z-index: 100;
+    width: 90%;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    max-width: 1140px;
+}
+.mainContent{
+    margin-top: 200px;
 
+}
+.allinOneRow{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+}
+.oneImage{
+    width:33%;
+    min-width:155px;
+    flex-grow: 1;
+}
 .nonebox{
     height: 300px;width: 300px;
     text-align: center;
