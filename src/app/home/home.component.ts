@@ -43,6 +43,8 @@ export class HomeComponent implements OnInit {
   }
 
   displayNextWord() {
+    this.db.selectedWordData.checked += 1;
+    console.log(this.db.selectedWordData);
     this.firestore.collection("allImgs").doc(this.db.selectedWord.id).set(this.db.selectedWordData).then(res => {
       this.db.getNewWord();
       this.selectedImgs = []

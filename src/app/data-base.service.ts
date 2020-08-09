@@ -46,7 +46,6 @@ export class DataBaseService {
         this.selectedWord = this.firebaseData[this.selectedindex].payload.doc
         this.selectedWordData = this.selectedWord.data();
         this.selectedID = this.selectedWordData.wordID
-        this.selectedWordData.checked += 1
         this.isDataFetched = true;
       })
 
