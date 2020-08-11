@@ -4,8 +4,9 @@
     <div class="fixHeader">
       <br>
       <h1 class="heading">
-        {{db.allImgData[db.selectedID]['wordDetails'][0]  }}</h1>
-      <h4 class="heading">{{db.allImgData[db.selectedID]['wordDetails'][1]}}</h4>
+        {{db.allWordsData[db.selectedID]['word']  }}</h1>
+      <h6 class="heading">{{db.allWordsData[db.selectedID]['defs']}}</h6>
+      <!-- <p>{{db.allWordsData[db.selectedID]['examples']}}</p> -->
       <p>Select Images/GIF that matches Best with the Given Word and Meaning (You can select multiple)</p>
     </div>
   </div>
@@ -32,4 +33,4 @@
 </div>
 
 
-<button (click)="this.db.processData()">CLick me</button>
+<button (click)="this.db.convertToCSV()">CLick me</button>

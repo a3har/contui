@@ -8,11 +8,11 @@ export class dataMuseQuery {
 
 export class wordObject {
 	word: string;
-	id: string;
+	id: number;
 	defs: string[]; // a : seprated string
 	wordNetDef: string[]
 	pos: string; // part of speech
-	nGramFreq: string;
+	nGramFreq: number;
 	examples: string[];
 	shortExample: string[];
 	podcastLink: string;
