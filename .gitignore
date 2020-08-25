@@ -4,3 +4,4 @@ package-lock.json
 dist
 firebase-debug.log
 .firebase
+firebase-sdk-admin.json

@@ -15,7 +15,7 @@
 
     <div class="allinOneRow">
 
-      <div class="oneImage" *ngFor="let image of db.allImgData[db.selectedID]['images'];let index= index;">
+      <div class="oneImage" *ngFor="let image of db.selectedWordData['images'];let index= index;">
         <img [src]="image['src']" class="img-fluid img-thumbnail image"
           [ngClass]="{'selected': selectedImgs.includes(index)}" (click)="onImgClick(index)">
 
